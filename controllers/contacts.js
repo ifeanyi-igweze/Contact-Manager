@@ -16,6 +16,12 @@ export const getContact = async (req, res) => {
 //@route: POST /api/contacts/
 //@access: Public
 export const createContact = async (req, res) => {
+    console.log("The Request Body is:", req.body);
+    const {name, email, phone} = req.body;
+    if (!name || !email || !phone) {
+        return res.status(400);
+        throw new Error("All Fields are Mandatory");
+    }
     res.send("New Customer");
 };
 

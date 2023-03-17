@@ -5,6 +5,8 @@ dotenv.config();
 const app = express();
 
 // These are middlewares
+
+// This provides a parser that allows us to parse the data received from the client side
 app.use(express.json())
 app.use("/api/contacts", contacts);
 
