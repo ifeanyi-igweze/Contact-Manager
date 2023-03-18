@@ -4,16 +4,21 @@ import {Contact} from "../models/contact.js";
 //@desc: Get all contacts
 //@route: GET /api/contacts
 //@access: Public
-export const allContact = asyncHandler(async (req, res) => {
+export const allContacts = asyncHandler(async (req, res) => {
     const contacts = await Contact.find();
     res.send(contacts);
 });
 
-//@desc: Get one contacts
+//@desc: Get one contact
 //@route: GET /api/contacts/:id
 //@access: Public
 export const getContact = asyncHandler(async (req, res) => {
-    res.send(`Get Customer ${req.params.id}`);
+    const contact = await Contact.findById(req.params.id);
+    if (!contact){
+        res.status(404);
+        throw new Error("Contact not Found");
+    }
+    res.status(200).send(contact);
 });
 
 //@desc: Create new contact
@@ -37,13 +42,29 @@ export const createContact = asyncHandler(async (req, res) => {
 //@desc: Edit a contact
 //@route: PUT /api/contacts/:id
 //@access: Public
-export const editContact = asyncHandler(async (req, res) => {
-    res.send(`Edit Customer ${req.params.id}`);
+export const updateContact = asyncHandler(async (req, res) => {
+    const contact = await Contact.findById(req.params.id);
+    if (!contact){
+        res.status(404);
+        throw new Error("Contact not Found");
+    }
+    const updatedContact = await Contact.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {new: true}
+    );
+    res.status(200).send(updatedContact);
 });
 
 //@desc: Delete a contact
 //@route: DELETE /api/contacts/:id
 //@access: Public
 export const deleteContact = asyncHandler(async (req, res) => {
-    res.send(`Delete Customer ${req.params.id}`);
+    const contact = await Contact.findById(req.params.id);
+    if (!contact){
+        res.status(404);
+        throw new Error("Contact not Found");
+    }
+    await Contact.findByIdAndRemove(req.params.id);
+    res.status(200).send(contact);
 });
