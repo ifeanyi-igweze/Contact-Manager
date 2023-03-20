@@ -1,6 +1,10 @@
 import express from "express";
 const router = express.Router();
+import {auth} from "../middleware/auth.js";
 import {allContacts, getContact, createContact, updateContact, deleteContact} from "../controllers/contacts.js";
+
+// A neat way to use / implement my Auth middleware on all the contacts routes
+router.use(auth);
 
 router.get("/", allContacts)
 

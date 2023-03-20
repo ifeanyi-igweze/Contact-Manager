@@ -61,8 +61,8 @@ export const loginUser = asyncHandler(async (req, res) => {
             },
             //Access Token Secret Key
             process.env.ACCESSTOKENSECRET,
-            // Option like token expiry
-            {expiresIn: "1m"}
+            // Options like token expiry
+            {expiresIn: "15m"}
         );
 
         res.status(200).send(accessToken);
@@ -79,5 +79,5 @@ export const loginUser = asyncHandler(async (req, res) => {
 //@route: GET /api/users/current
 //@access: Private
 export const currentUser = asyncHandler(async (req, res) => {
-    res.send("Current User");
+    res.send(req.user);
 });
