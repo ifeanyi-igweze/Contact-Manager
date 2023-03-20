@@ -1,4 +1,5 @@
 import asyncHandler from "express-async-handler";
+import bcrypt from "bcrypt";
 import {User} from "../models/user.js";
 
 //@desc: Register a User
@@ -16,10 +17,21 @@ export const registerUser = asyncHandler(async (req, res) => {
         throw new Error("User Already Exists");
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
-
+        username,
+        email,
+        password: hashedPassword
     });
-    res.send("Register User");
+    if (newUser){
+        const result = {userId: newUser._id, email: newUser.email}
+        res.status(201).send(result);
+    }
+    else{
+        res.status(400);
+        throw new Error("Invalid Data");
+    }
+    
 });
 
 //@desc: Log a User in
