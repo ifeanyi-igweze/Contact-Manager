@@ -4,6 +4,9 @@ import contacts from "./routes/contacts.js";
 import users from "./routes/users.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import mongoose from "mongoose";
+import swaggerUI from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
+import {swaggerDocs} from "./utils/swagger.js";
 dotenv.config();
 const app = express();
 
@@ -18,15 +21,18 @@ const connectDb = async () => {
 }
 
 connectDb();
+const port = process.env.PORT || 5000;
+
 // These are middlewares
 
 // This provides a parser that allows us to parse the data received from the client side
-app.use(express.json())
+app.use(express.json());
+swaggerDocs(app, port);
 app.use("/api/contacts", contacts);
 app.use("/api/users", users);
 app.use(errorHandler);
 
-const port = process.env.PORT || 5000;
+
 app.listen(port, () => {
     console.log(`Server running on Port ${port}`);
 })
