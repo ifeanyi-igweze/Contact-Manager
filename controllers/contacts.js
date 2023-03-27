@@ -6,7 +6,11 @@ import {Contact} from "../models/contact.js";
 //@access: Private
 export const allContacts = asyncHandler(async (req, res) => {
     const contacts = await Contact.find({user_id: req.user.id});
-    res.send(contacts);
+    if (!contacts) {
+        res.status(404);
+        throw new Error("Contact not Found");
+    }
+    res.status(200).send(contacts);
 });
 
 //@desc: Get one contact
@@ -19,10 +23,10 @@ export const getContact = asyncHandler(async (req, res) => {
         throw new Error("Contact not Found");
     }
 
-    if (contact.user_id !== req.user.id){
-        res.status(403);
-        throw new Error("User doesn't have permission to update other user contacts");
-    }
+    //if (contact.user_id !== req.user.id){
+    //    res.status(403);
+    //    throw new Error("User doesn't have permission to update other user contacts");
+    //}
     
     res.status(200).send(contact);
 });

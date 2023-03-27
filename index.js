@@ -4,8 +4,7 @@ import contacts from "./routes/contacts.js";
 import users from "./routes/users.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import mongoose from "mongoose";
-import swaggerUI from "swagger-ui-express";
-import swaggerJsDoc from "swagger-jsdoc";
+import cors from "cors";
 import {swaggerDocs} from "./utils/swagger.js";
 dotenv.config();
 const app = express();
@@ -26,6 +25,7 @@ const port = process.env.PORT || 5000;
 // These are middlewares
 
 // This provides a parser that allows us to parse the data received from the client side
+app.use(cors());
 app.use(express.json());
 swaggerDocs(app, port);
 app.use("/api/contacts", contacts);
