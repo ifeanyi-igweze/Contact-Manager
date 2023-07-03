@@ -22,8 +22,6 @@ const connectDb = async () => {
 connectDb();
 const port = process.env.PORT || 5000;
 
-// These are middlewares
-
 // This provides a parser that allows us to parse the data received from the client side
 app.use(cors());
 app.use(express.json());

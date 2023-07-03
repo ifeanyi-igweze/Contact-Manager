@@ -93,12 +93,12 @@ router.get("/", allContacts)
  *              description: The contact was not found
  */
 
-router.get("/:id", getContact)
+router.get("/:id", auth, getContact)
 
-router.post("/", createContact)
+router.post("/", auth, createContact)
 
-router.put("/:id", updateContact)
+router.put("/:id", auth, updateContact)
 
-router.delete("/:id", deleteContact)
+router.delete("/:id", auth, deleteContact)
 
 export default router;

@@ -72,7 +72,6 @@ export const loginUser = asyncHandler(async (req, res) => {
         throw new Error("Email or Password are invalid");
     }
 
-    res.send("Login User");
 });
 
 //@desc: Get the Current User
