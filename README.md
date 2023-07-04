@@ -98,7 +98,7 @@ This project is a Contact-Manager Web API that allows users to register and logi
  {
    "name": "John Doe",
    "phone": "1234567890",
-   "email": "ohndoe@example.com
+   "email": "ohndoe@example.com"
 ```
  - The response will include the contact's details
 
