@@ -6,7 +6,7 @@ import {Contact} from "../models/contact.js";
 //@access: Private
 export const allContacts = asyncHandler(async (req, res) => {
     const contacts = await Contact.find({user_id: req.user.id});
-    if (!contacts) {
+    if (contacts.length == 0) {
         res.status(404);
         throw new Error("Contact not Found");
     }
@@ -23,7 +23,7 @@ export const getContact = asyncHandler(async (req, res) => {
         throw new Error("Contact not Found");
     }
 
-    if (contact.user_id !== req.user.id){
+    if (contact.user_id.toString() !== req.user.id){
        res.status(403);
        throw new Error("User doesn't have permission to view this contact");
     }
@@ -59,7 +59,7 @@ export const updateContact = asyncHandler(async (req, res) => {
         throw new Error("Contact not Found");
     }
 
-    if (contact.user_id !== req.user.id){
+    if (contact.user_id.toString() !== req.user.id){
         res.status(403);
         throw new Error("User doesn't have permission to update this contact");
     }
@@ -81,7 +81,7 @@ export const deleteContact = asyncHandler(async (req, res) => {
         throw new Error("Contact not Found");
     }
 
-    if (contact.user_id !== req.user.id){
+    if (contact.user_id.toString() !== req.user.id){
         res.status(403);
         throw new Error("User doesn't have permission to delete this contact");
     }
