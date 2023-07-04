@@ -1,9 +1,6 @@
 import asyncHandler from "express-async-handler";
 import {Contact} from "../models/contact.js";
 
-//@desc: Get all contacts
-//@route: GET /api/contacts
-//@access: Private
 export const allContacts = asyncHandler(async (req, res) => {
     const contacts = await Contact.find({user_id: req.user.id});
     if (contacts.length == 0) {
@@ -13,9 +10,6 @@ export const allContacts = asyncHandler(async (req, res) => {
     res.status(200).send(contacts);
 });
 
-//@desc: Get one contact
-//@route: GET /api/contacts/:id
-//@access: Private
 export const getContact = asyncHandler(async (req, res) => {
     const contact = await Contact.findById(req.params.id);
     if (!contact){
@@ -31,9 +25,6 @@ export const getContact = asyncHandler(async (req, res) => {
     res.status(200).send(contact);
 });
 
-//@desc: Create new contact
-//@route: POST /api/contacts/
-//@access: Private
 export const createContact = asyncHandler(async (req, res) => {
     const {name, email, phone} = req.body;
     if (!name || !email || !phone) {
@@ -49,9 +40,6 @@ export const createContact = asyncHandler(async (req, res) => {
     res.send(contact);
 });
 
-//@desc: Edit a contact
-//@route: PUT /api/contacts/:id
-//@access: Private
 export const updateContact = asyncHandler(async (req, res) => {
     const contact = await Contact.findById(req.params.id);
     if (!contact){
@@ -71,9 +59,6 @@ export const updateContact = asyncHandler(async (req, res) => {
     res.status(200).send(updatedContact);
 });
 
-//@desc: Delete a contact
-//@route: DELETE /api/contacts/:id
-//@access: Private
 export const deleteContact = asyncHandler(async (req, res) => {
     const contact = await Contact.findById(req.params.id);
     if (!contact){

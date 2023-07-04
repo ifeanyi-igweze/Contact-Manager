@@ -5,7 +5,6 @@ import users from "./routes/users.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import mongoose from "mongoose";
 import cors from "cors";
-import {swaggerDocs} from "./utils/swagger.js";
 dotenv.config();
 const app = express();
 
@@ -25,7 +24,6 @@ const port = process.env.PORT || 5000;
 // This provides a parser that allows us to parse the data received from the client side
 app.use(cors());
 app.use(express.json());
-swaggerDocs(app, port);
 app.use("/api/contacts", contacts);
 app.use("/api/users", users);
 app.use(errorHandler);

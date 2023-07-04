@@ -5,9 +5,6 @@ import dotenv from "dotenv";
 import {User} from "../models/user.js";
 dotenv.config();
 
-//@desc: Register a User
-//@route: POST /api/users/register
-//@access: Public
 export const registerUser = asyncHandler(async (req, res) => {
     const {username, email, password} = req.body;
     if (!username || !email || !password){
@@ -37,9 +34,6 @@ export const registerUser = asyncHandler(async (req, res) => {
     
 });
 
-//@desc: Log a User in
-//@route: POST /api/users/login
-//@access: Public
 export const loginUser = asyncHandler(async (req, res) => {
     const {email, password} = req.body;
     if (!email || !password){
@@ -74,9 +68,6 @@ export const loginUser = asyncHandler(async (req, res) => {
 
 });
 
-//@desc: Get the Current User
-//@route: GET /api/users/current
-//@access: Private
 export const currentUser = asyncHandler(async (req, res) => {
     res.send(req.user);
 });
