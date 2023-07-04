@@ -67,7 +67,6 @@ import {allContacts, getContact, createContact, updateContact, deleteContact} fr
 // A neat way to use / implement my Auth middleware on all the contacts routes
 //router.use(auth);
 
-router.get("/", allContacts)
 
 /**
  * @swagger
@@ -88,10 +87,11 @@ router.get("/", allContacts)
  *              content:
  *                  application/json:
  *                      schema:
-*                           $ref: '#components/schemas/Contact'
+ *                           $ref: '#components/schemas/Contact'
  *          404:
  *              description: The contact was not found
- */
+*/
+router.get("/", auth, allContacts)
 
 router.get("/:id", auth, getContact)
 
