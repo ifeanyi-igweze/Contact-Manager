@@ -7,7 +7,7 @@ router.get("/", auth, allContacts)
 
 router.get("/:id", auth, getContact)
 
-router.post("/", auth, createContact)
+router.post("/", createContact)
 
 router.put("/:id", auth, updateContact)
 

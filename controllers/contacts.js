@@ -26,18 +26,8 @@ export const getContact = asyncHandler(async (req, res) => {
 });
 
 export const createContact = asyncHandler(async (req, res) => {
-    const {name, email, phone} = req.body;
-    if (!name || !email || !phone) {
-        res.status(400);
-        throw new Error("All Fields are Mandatory");
-    }
-    const contact = await Contact.create({
-        name, 
-        email,
-        phone,
-        user_id: req.user.id
-    });
-    res.send(contact);
+    res.send(req.body);
+    console.log(req.body);
 });
 
 export const updateContact = asyncHandler(async (req, res) => {

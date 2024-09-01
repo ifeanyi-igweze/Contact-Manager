@@ -18,7 +18,7 @@ const connectDb = async () => {
     }
 }
 
-connectDb();
+// connectDb();
 const port = process.env.PORT || 5000;
 
 // This provides a parser that allows us to parse the data received from the client side
